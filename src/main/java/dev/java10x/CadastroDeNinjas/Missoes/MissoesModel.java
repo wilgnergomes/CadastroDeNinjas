@@ -18,12 +18,17 @@ public class MissoesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "nome")
     private String nome;
 
     @Column(unique = true)
     private String dificuldade;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     // @OneToMany: uma missão terá muitos ninjas
     @OneToMany(mappedBy = "missoes")
