@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 
@@ -27,12 +26,12 @@ public class MissoesModel {
     @Column(unique = true)
     private String dificuldade;
 
-    @Column(name = "img_url")
-    private String imgUrl;
+/*    @Column(name = "img_url")
+    private String imgUrl;*/
 
     // @OneToMany: uma missão terá muitos ninjas
     @OneToMany(mappedBy = "missoes")
-    private NinjaModel ninja;
+    private List<NinjaModel> ninja;
 
     
 }
