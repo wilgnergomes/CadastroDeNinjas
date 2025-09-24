@@ -12,4 +12,35 @@ public class NinjaController {
         return "Essa é a minha primeira mensagem nessa rota";
     }
 
+    //#CRUD
+
+    // Adicionar ninja (CREATE)
+    @PostMapping("/criar")
+    public String criarNinja() {
+        return "Ninja criado";
+    }
+
+    // Mostrar todos os ninjas (READ)
+    @GetMapping("/todos")
+    public String mostrarTodosOsNinja() {
+        return "Mostrando todos os ninjas";
+    }
+
+    // Mostrar ninja por ID (READ)
+    @GetMapping("/todosID")
+    public String mostrarTodosOsNinjasPorId() {
+        return "Mostrando todos os ID";
+    }
+
+    // Alterar dados dos ninjas (UPDATE)
+    @PutMapping("/alterarID")
+    public String alterarNinjaPorId() {
+        return "Alterando o ninja por ID";
+    }
+
+    // Deletar ninja (DELETE)
+    @DeleteMapping("/deletarID")
+    public String deletarNinjaPorId() {
+        return "Deletando o ninja por ID";
+    }
 }
