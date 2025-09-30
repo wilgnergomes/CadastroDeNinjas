@@ -12,8 +12,14 @@ public class MissoesService {
         this.missoesRepository = missoesRepository;
     }
 
+    public MissoesModel criarMissoes(MissoesModel missoesModel) {
+        return missoesRepository.save(missoesModel);
+    }
+
     public List<MissoesModel> listarMissoes() {
         return missoesRepository.findAll();
     }
+
+
 
 }
