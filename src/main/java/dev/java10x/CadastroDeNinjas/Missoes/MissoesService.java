@@ -20,6 +20,10 @@ public class MissoesService {
         return missoesRepository.findAll();
     }
 
+    public void deletarMissoesPorId(Long id) {
+        missoesRepository.deleteById(id);
+    }
+
 
 
 }
