@@ -8,13 +8,17 @@ import java.util.List;
 @Service
 public class MissoesService {
     private MissoesRepository missoesRepository;
+    private MissoesMapper missoesMapper;
 
-    public MissoesService(MissoesRepository missoesRepository) {
+    public MissoesService(MissoesRepository missoesRepository, MissoesMapper missoesMapper) {
         this.missoesRepository = missoesRepository;
+        this.missoesMapper = missoesMapper;
     }
 
-    public MissoesModel criarMissoes(MissoesModel missoesModel) {
-        return missoesRepository.save(missoesModel);
+    public MissoesDTO criarMissoes(MissoesDTO missoes) {
+        MissoesModel missoesModel = missoesMapper.map(missoes);
+        missoesModel = missoesRepository.save(missoesModel);
+        return missoesMapper.map(missoesModel);
     }
 
     public List<MissoesModel> listarMissoes() {
