@@ -1,10 +1,12 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
+import dev.java10x.CadastroDeNinjas.Ninjas.NinjaDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//LOCALHOST:8080/
 @RestController
 @RequestMapping("missoes")
 public class MissoesController {
@@ -14,27 +16,33 @@ public class MissoesController {
         this.missoesService = missoesService;
     }
 
-    // GET -- Mandar uma requisição para mostrar as missões
     @GetMapping("/listar")
-    public List<MissoesDTO> listarMissoes() {
-        return  missoesService.listarMissoes();
+    public ResponseEntity<List<MissoesDTO>> listarMissoes() {
+        List<MissoesDTO> missoes = missoesService.listarMissoes();
+        return ResponseEntity.ok(missoes);
     }
-    // POST -- Mandar uma requisição para criar as missões
+
     @PostMapping("/criar")
-    public MissoesDTO criarMissoes(@RequestBody MissoesDTO missoesDTO) {
-        return missoesService.criarMissoes(missoesDTO);
+    public ResponseEntity<MissoesDTO> criarMissoes(@RequestBody MissoesDTO missoesDTO) {
+        MissoesDTO missao = missoesService.criarMissoes(missoesDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(missao);
     }
 
-    // PUT -- Mandar uma requisição para alterar as missões
     @PutMapping("/alterar/{id}")
-    public MissoesDTO alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missaoAtualizada) {
-        return missoesService.alterarMissoesPorId(id, missaoAtualizada);
+    public ResponseEntity<?> alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missaoAtualizada) {
+        MissoesDTO missao = missoesService.alterarMissoesPorId(id, missaoAtualizada);
+        if ( missao == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("A missão com o ID" + id + " não pertence a lista." );
+        }
+
+        return ResponseEntity.ok(missao);
     }
 
-    // GET -- Mandar uma requisição para deletar as missões
     @DeleteMapping("/deletar/{id}")
     public void deletarMissao(@PathVariable Long id) {
-        missoesService.deletarMissoesPorId(id); ;
+        missoesService.deletarMissoesPorId(id);
     }
 
 }
