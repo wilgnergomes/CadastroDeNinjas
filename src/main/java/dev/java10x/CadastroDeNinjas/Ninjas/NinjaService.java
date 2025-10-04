@@ -48,7 +48,6 @@ public class NinjaService {
         return null;
     }
 
-    // Deletar todos os meus ninjas por ID
     public void deletarNinjaPorId(Long id) {
         ninjaRepository.deleteById(id);
     }

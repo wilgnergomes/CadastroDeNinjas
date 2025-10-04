@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("missoes")
@@ -20,6 +21,19 @@ public class MissoesController {
     public ResponseEntity<List<MissoesDTO>> listarMissoes() {
         List<MissoesDTO> missoes = missoesService.listarMissoes();
         return ResponseEntity.ok(missoes);
+    }
+
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<?> listarMissoesPorId(@PathVariable Long id) {
+        MissoesDTO missao = missoesService.listarMissoesPorId(id);
+        if (missao == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("A missão com o ID" + id + " não pertence a lista." );
+        }
+
+        return ResponseEntity.ok(missao);
+
+
     }
 
     @PostMapping("/criar")

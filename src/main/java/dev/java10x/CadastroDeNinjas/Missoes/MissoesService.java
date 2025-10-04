@@ -4,6 +4,7 @@ import dev.java10x.CadastroDeNinjas.Ninjas.NinjaModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +28,11 @@ public class MissoesService {
         return missoesModels.stream()
                 .map(missoesMapper::map)
                 .collect(Collectors.toList());
+    }
+
+    public MissoesDTO listarMissoesPorId(Long id) {
+        Optional<MissoesModel> missao = missoesRepository.findById(id);
+        return missao.map(missoesMapper::map).orElse(null);
     }
 
     public MissoesDTO alterarMissoesPorId(Long id, MissoesDTO missaoAtualizada) {
