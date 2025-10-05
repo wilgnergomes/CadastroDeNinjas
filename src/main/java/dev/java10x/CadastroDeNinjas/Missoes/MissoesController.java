@@ -32,8 +32,6 @@ public class MissoesController {
         }
 
         return ResponseEntity.ok(missao);
-
-
     }
 
     @PostMapping("/criar")
@@ -55,8 +53,15 @@ public class MissoesController {
     }
 
     @DeleteMapping("/deletar/{id}")
-    public void deletarMissao(@PathVariable Long id) {
+    public ResponseEntity<String> deletarMissao(@PathVariable Long id) {
+        MissoesDTO missoes = missoesService.listarMissoesPorId(id);
+        if (missoes == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("A missão com o ID" + id + " não pertence a lista." );
+        }
+
         missoesService.deletarMissoesPorId(id);
+        return ResponseEntity.ok("A missão com o ID " + id + " foi deletado com sucesso");
     }
 
 }

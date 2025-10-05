@@ -1,6 +1,5 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
-import dev.java10x.CadastroDeNinjas.Ninjas.NinjaModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
