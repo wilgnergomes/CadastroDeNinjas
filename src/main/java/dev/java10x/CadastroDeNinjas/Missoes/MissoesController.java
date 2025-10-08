@@ -1,17 +1,15 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
-import dev.java10x.CadastroDeNinjas.Ninjas.NinjaDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("missoes")
 public class MissoesController {
-    private MissoesService missoesService;
+    private final MissoesService missoesService;
 
     public MissoesController(MissoesService missoesService) {
         this.missoesService = missoesService;
@@ -28,7 +26,7 @@ public class MissoesController {
         MissoesDTO missao = missoesService.listarMissoesPorId(id);
         if (missao == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("A missão com o ID" + id + " não pertence a lista." );
+                    .body("A missão com o ID" + id + " não pertence a lista.");
         }
 
         return ResponseEntity.ok(missao);
@@ -44,9 +42,9 @@ public class MissoesController {
     @PutMapping("/alterar/{id}")
     public ResponseEntity<?> alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO missaoAtualizada) {
         MissoesDTO missao = missoesService.alterarMissoesPorId(id, missaoAtualizada);
-        if ( missao == null) {
+        if (missao == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("A missão com o ID" + id + " não pertence a lista." );
+                    .body("A missão com o ID" + id + " não pertence a lista.");
         }
 
         return ResponseEntity.ok(missao);
@@ -57,7 +55,7 @@ public class MissoesController {
         MissoesDTO missoes = missoesService.listarMissoesPorId(id);
         if (missoes == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("A missão com o ID" + id + " não pertence a lista." );
+                    .body("A missão com o ID" + id + " não pertence a lista.");
         }
 
         missoesService.deletarMissoesPorId(id);
