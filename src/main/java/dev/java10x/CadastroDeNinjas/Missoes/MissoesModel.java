@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class MissoesModel {
 
     @Id
@@ -27,10 +29,6 @@ public class MissoesModel {
     @Column(unique = true)
     private String dificuldade;
 
-/*    @Column(name = "img_url")
-    private String imgUrl;*/
-
-    // @OneToMany: uma missão terá muitos ninjas
     @OneToMany(mappedBy = "missoes")
     @JsonIgnore
     private List<NinjaModel> ninja;
