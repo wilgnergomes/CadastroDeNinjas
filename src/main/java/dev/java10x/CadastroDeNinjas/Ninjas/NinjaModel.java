@@ -37,4 +37,7 @@ public class NinjaModel {
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
 
+    @Column(name = "img_url")
+    private String imgUrl;
+
 }
